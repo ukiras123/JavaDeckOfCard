@@ -5,18 +5,25 @@ import java.util.Random;
 import com.kiran.deckoOfCard.Types.Rank;
 import com.kiran.deckoOfCard.Types.Suites;
 
+/**
+ * Class that holds deck of cards.
+ * 
+ * @author Kiran
+ * @version 1.0 May 1, 2017
+ */
 public class DeckOfCards {
 
-	private Cards[] card;
+	private static Cards[] card;
 	private final static int total = 52;
-	private Random rand;
+	private static Random rand;
 	private static int cardLeft = 52;
+	public int a = 4;
 
 	public DeckOfCards() {
 		this(total);
 	}
-	
-	public DeckOfCards(int total) {
+
+	private DeckOfCards(int total) {
 		card = new Cards[total];
 		int start = 0;
 		for (Suites s : Suites.values()) {
@@ -26,10 +33,9 @@ public class DeckOfCards {
 			}
 		}
 	}
-	
-	
 
-	public void suffle() {
+	public static void suffle() {
+		cardLeft = 52;
 		for (int i = 0; i < total; i++) {
 			rand = new Random();
 			int random = rand.nextInt(total - 1) + 1;
@@ -39,16 +45,15 @@ public class DeckOfCards {
 		}
 	}
 
-	public String deal() throws Exception {
+	public Cards deal() throws Exception {
 		if (cardLeft < 1)
 			throw new Exception("No more card left");
-		String value = card[cardLeft - 1].toString();
+		Cards newCard = card[cardLeft - 1];
 		cardLeft--;
-		return value;
+		return newCard;
 	}
-	
-	public int cardLeft()
-	{
+
+	public int cardLeft() {
 		return cardLeft;
 	}
 
@@ -60,4 +65,5 @@ public class DeckOfCards {
 		}
 		return output;
 	}
+
 }
