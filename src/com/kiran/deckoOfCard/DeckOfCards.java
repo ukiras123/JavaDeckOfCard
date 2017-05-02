@@ -2,26 +2,32 @@ package com.kiran.deckoOfCard;
 
 import java.util.Random;
 
-import com.kiran.deckoOfCard.Types.Num;
+import com.kiran.deckoOfCard.Types.Rank;
 import com.kiran.deckoOfCard.Types.Suites;
 
 public class DeckOfCards {
 
-	Cards[] card;
-	private int total = 52;
-	Random rand;
-	int cardLeft = 52;
+	private Cards[] card;
+	private final static int total = 52;
+	private Random rand;
+	private static int cardLeft = 52;
 
 	public DeckOfCards() {
+		this(total);
+	}
+	
+	public DeckOfCards(int total) {
 		card = new Cards[total];
 		int start = 0;
 		for (Suites s : Suites.values()) {
-			for (Num n : Num.values()) {
+			for (Rank n : Rank.values()) {
 				card[start] = new Cards(s, n);
 				start++;
 			}
 		}
 	}
+	
+	
 
 	public void suffle() {
 		for (int i = 0; i < total; i++) {
@@ -39,6 +45,11 @@ public class DeckOfCards {
 		String value = card[cardLeft - 1].toString();
 		cardLeft--;
 		return value;
+	}
+	
+	public int cardLeft()
+	{
+		return cardLeft;
 	}
 
 	@Override
